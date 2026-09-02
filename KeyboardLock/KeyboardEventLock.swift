@@ -39,10 +39,20 @@ final class KeyboardEventLock {
             for eventType in pointerEvents {
                 mask |= CGEventMask(1) << eventType.rawValue
             }
+
+            // AppKit exposes trackpad gestures with raw event types that do not all
+            // have named CoreGraphics cases. Including them prevents system gestures
+            // from escaping the full-cleaning mode on older Intel trackpads.
+            let gestureEventRawValues: [UInt32] = [18, 19, 20, 29, 30, 31, 32, 34, 37, 38]
+            for rawValue in gestureEventRawValues {
+                mask |= CGEventMask(1) << rawValue
+            }
         }
 
         guard let tap = CGEvent.tapCreate(
-            tap: .cgSessionEventTap,
+            // HID level is required to suppress pointer events reliably before
+            // WindowServer turns trackpad input into application/system gestures.
+            tap: .cghidEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
             eventsOfInterest: mask,

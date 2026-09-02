@@ -117,7 +117,7 @@ Questa modalità serve quando vuoi pulire anche il trackpad.
 5. Dopo il blocco, aspetta il tempo mostrato nella finestra.
 6. Tastiera e puntatore si riattiveranno automaticamente.
 
-Durante la pulizia completa vengono bloccati sia il trackpad sia eventuali mouse collegati. Non è possibile usare il pulsante o il menu mentre il puntatore è bloccato. Se devi interrompere prima del termine, tieni premuto **ESC per 3 secondi**.
+Durante la pulizia completa vengono bloccati sia il trackpad sia eventuali mouse collegati, compresi clic, movimento, scorrimento e gesti. Non è possibile usare il pulsante o il menu mentre il puntatore è bloccato. Se devi interrompere prima del termine, tieni premuto **ESC per 3 secondi**.
 
 Per sicurezza, la modalità completa non permette un blocco senza timer. Anche la chiusura o l'arresto dell'app rimuovono il filtro degli eventi.
 
