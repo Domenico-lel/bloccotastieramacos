@@ -11,6 +11,7 @@ enum KeyboardLockError: LocalizedError {
 
 final class KeyboardEventLock {
     var onEmergencyUnlock: (() -> Void)?
+    var onEscapeHoldChanged: ((Bool) -> Void)?
 
     private var eventTap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
@@ -74,6 +75,9 @@ final class KeyboardEventLock {
         if event.getIntegerValueField(.keyboardEventKeycode) == 53 {
             if type == .keyDown && !escapeIsDown {
                 escapeIsDown = true
+                DispatchQueue.main.async { [weak self] in
+                    self?.onEscapeHoldChanged?(true)
+                }
                 let timer = DispatchWorkItem { [weak self] in
                     guard let self, self.escapeIsDown else { return }
                     self.unlock()
@@ -92,9 +96,15 @@ final class KeyboardEventLock {
     }
 
     private func cancelEmergencyUnlock() {
+        let wasHolding = escapeIsDown
         escapeIsDown = false
         escapeTimer?.cancel()
         escapeTimer = nil
+        if wasHolding {
+            DispatchQueue.main.async { [weak self] in
+                self?.onEscapeHoldChanged?(false)
+            }
+        }
     }
 
     private static let callback: CGEventTapCallBack = { _, type, event, userInfo in

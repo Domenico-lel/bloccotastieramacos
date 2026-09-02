@@ -10,6 +10,8 @@ Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci
 - puoi sbloccare tutto con il pulsante **Sblocca**;
 - in emergenza puoi tenere premuto **ESC per 3 secondi**.
 
+Prima del blocco parte un conto alla rovescia di 3 secondi, che puoi annullare. L'icona nella barra dei menu permette inoltre di mostrare l'app, bloccare, sbloccare o uscire in qualsiasi momento usando mouse o trackpad.
+
 L'app non usa Internet, non raccoglie dati e non contiene pubblicità.
 
 ## Compatibilità
@@ -89,10 +91,18 @@ Queste autorizzazioni permettono soltanto all'app di intercettare i tasti. L'app
 
 1. Apri **Blocco Tastiera**.
 2. Premi **BLOCCA TASTIERA**.
-3. Pulisci la tastiera usando il mouse o il trackpad quando necessario.
-4. Clicca **Sblocca** per riattivare i tasti.
+3. Attendi il conto alla rovescia di 3 secondi. Premi **Annulla** se hai cambiato idea.
+4. Pulisci la tastiera usando il mouse o il trackpad quando necessario.
+5. Clicca **Sblocca** per riattivare i tasti.
 
 Se non riesci a premere il pulsante, tieni premuto il tasto **ESC per 3 secondi**.
+
+Puoi anche usare l'icona nella barra dei menu, nella parte superiore dello schermo:
+
+- **Mostra Blocco Tastiera** riapre la finestra;
+- **Blocca tastiera…** avvia il conto alla rovescia;
+- **Sblocca** riattiva immediatamente i tasti;
+- **Esci** chiude l'app e assicura lo sblocco della tastiera.
 
 ## Aggiornare l'app
 

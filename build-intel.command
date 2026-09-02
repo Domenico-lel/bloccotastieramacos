@@ -14,11 +14,14 @@ app_path="$build_dir/Blocco Tastiera.app"
 contents_path="$app_path/Contents"
 executable_path="$contents_path/MacOS/Blocco Tastiera"
 compiled_executable="$build_dir/Blocco-Tastiera.compiled"
+module_cache="$build_dir/ModuleCache"
 
 mkdir -p "$build_dir"
+mkdir -p "$module_cache"
 
 sdk_path="$(xcrun --sdk macosx --show-sdk-path)"
 xcrun swiftc -parse-as-library -O -target x86_64-apple-macosx13.0 -sdk "$sdk_path" \
+  -module-cache-path "$module_cache" \
   KeyboardLock/KeyboardLockApp.swift KeyboardLock/KeyboardEventLock.swift \
   -o "$compiled_executable"
 
