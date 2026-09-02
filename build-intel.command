@@ -1,0 +1,39 @@
+#!/bin/zsh
+set -euo pipefail
+
+cd "${0:A:h}"
+
+if ! xcrun --find swiftc >/dev/null 2>&1; then
+  print "Errore: gli strumenti Apple non sono ancora installati."
+  print "Termina l'installazione comparsa sullo schermo e riprova."
+  exit 1
+fi
+
+build_dir="$PWD/build"
+app_path="$build_dir/Blocco Tastiera.app"
+contents_path="$app_path/Contents"
+executable_path="$contents_path/MacOS/Blocco Tastiera"
+compiled_executable="$build_dir/Blocco-Tastiera.compiled"
+
+mkdir -p "$build_dir"
+
+sdk_path="$(xcrun --sdk macosx --show-sdk-path)"
+xcrun swiftc -parse-as-library -O -target x86_64-apple-macosx13.0 -sdk "$sdk_path" \
+  KeyboardLock/KeyboardLockApp.swift KeyboardLock/KeyboardEventLock.swift \
+  -o "$compiled_executable"
+
+# Il bundle viene creato solo dopo una compilazione riuscita.
+mkdir -p "$contents_path/MacOS"
+mkdir -p "$contents_path/Resources"
+cp KeyboardLock/Info.plist "$contents_path/Info.plist"
+cp KeyboardLock/AppIcon.icns "$contents_path/Resources/AppIcon.icns"
+cp "$compiled_executable" "$executable_path"
+/usr/libexec/PlistBuddy -c "Set :CFBundleExecutable Blocco Tastiera" "$contents_path/Info.plist"
+
+codesign --force --deep --sign - "$app_path"
+ditto -c -k --keepParent "$app_path" "$build_dir/Blocco-Tastiera-Intel.zip"
+
+print ""
+print "Creata: $app_path"
+print "Archivio: $build_dir/Blocco-Tastiera-Intel.zip"
+file "$executable_path"

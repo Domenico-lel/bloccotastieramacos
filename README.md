@@ -1,0 +1,157 @@
+# Blocco Tastiera
+
+**Blocco Tastiera** è una piccola applicazione gratuita per macOS.
+
+Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci. Quando il blocco è attivo:
+
+- i tasti normali non funzionano;
+- i tasti di volume, luminosità e riproduzione vengono bloccati;
+- mouse e trackpad continuano a funzionare;
+- puoi sbloccare tutto con il pulsante **Sblocca**;
+- in emergenza puoi tenere premuto **ESC per 3 secondi**.
+
+L'app non usa Internet, non raccoglie dati e non contiene pubblicità.
+
+## Compatibilità
+
+Questa versione è pensata per:
+
+- Mac con processore Intel;
+- macOS 13 Ventura;
+- Mac non ufficialmente supportati che utilizzano OpenCore Legacy Patcher.
+
+Non è stata preparata per Mac con processore Apple Silicon (M1, M2, M3 o successivi).
+
+## Installazione facile
+
+Segui i passaggi nell'ordine indicato.
+
+### 1. Scarica e apri il progetto
+
+1. Scarica il progetto da GitHub.
+2. Apri il file scaricato per estrarlo.
+3. Apri la cartella **Blocco-Tastiera-Progetto**.
+
+### 2. Crea l'applicazione
+
+1. Cerca il file **build-intel.command**.
+2. Fai clic destro sul file.
+3. Seleziona **Apri**.
+4. Se macOS mostra un avviso, premi nuovamente **Apri**.
+5. Si aprirà una finestra del Terminale.
+6. Aspetta senza chiudere la finestra.
+
+Al primo utilizzo, macOS potrebbe chiederti di installare gli strumenti Apple:
+
+1. Accetta l'installazione.
+2. Aspetta che finisca.
+3. Apri nuovamente **build-intel.command**.
+
+La procedura è riuscita solo quando nel Terminale compare una riga che inizia con **Creata:**.
+
+### 3. Sposta l'app in Applicazioni
+
+1. Torna nella cartella del progetto.
+2. Apri la nuova cartella **build**.
+3. Trova **Blocco Tastiera.app**.
+4. Trascina l'app nella cartella **Applicazioni** del Mac.
+
+Ora puoi eliminare la cartella del progetto. Conservala soltanto se vuoi ricompilare l'app in futuro.
+
+## Primo avvio
+
+macOS potrebbe bloccare il primo avvio perché l'app non è distribuita tramite App Store.
+
+1. Apri la cartella **Applicazioni**.
+2. Fai clic destro su **Blocco Tastiera**.
+3. Seleziona **Apri**.
+4. Nella finestra successiva premi ancora **Apri**.
+
+Non è necessario disattivare le protezioni di macOS.
+
+## Autorizzazioni necessarie
+
+L'app ha bisogno dell'autorizzazione Accessibilità per fermare i tasti.
+
+1. Apri **Blocco Tastiera**.
+2. Premi **BLOCCA TASTIERA**.
+3. Quando macOS mostra la richiesta, apri **Impostazioni di Sistema**.
+4. Vai in **Privacy e sicurezza**.
+5. Apri **Accessibilità**.
+6. Attiva l'interruttore accanto a **Blocco Tastiera**.
+7. Se l'app non compare, premi il pulsante `+` e selezionala dalla cartella Applicazioni.
+8. Controlla anche **Privacy e sicurezza > Monitoraggio input** e abilita l'app se richiesto.
+9. Chiudi completamente Blocco Tastiera e riaprila.
+
+Queste autorizzazioni permettono soltanto all'app di intercettare i tasti. L'app non registra e non salva ciò che digiti.
+
+## Come si usa
+
+1. Apri **Blocco Tastiera**.
+2. Premi **BLOCCA TASTIERA**.
+3. Pulisci la tastiera usando il mouse o il trackpad quando necessario.
+4. Clicca **Sblocca** per riattivare i tasti.
+
+Se non riesci a premere il pulsante, tieni premuto il tasto **ESC per 3 secondi**.
+
+## Aggiornare l'app
+
+1. Chiudi la versione attuale.
+2. Scarica e compila la nuova versione.
+3. Trascina la nuova **Blocco Tastiera.app** nella cartella Applicazioni.
+4. Quando Finder lo chiede, seleziona **Sostituisci**.
+
+Dopo un aggiornamento, macOS potrebbe chiedere nuovamente le autorizzazioni. In questo caso:
+
+1. Vai in **Privacy e sicurezza > Accessibilità**.
+2. Seleziona la vecchia voce **Blocco Tastiera** e premi `-`.
+3. Premi `+` e aggiungi la nuova app dalla cartella Applicazioni.
+4. Ripeti gli stessi passaggi in **Monitoraggio input**, se necessario.
+
+## Problemi comuni
+
+### La cartella build non compare
+
+La compilazione non è terminata correttamente. Leggi il messaggio nel Terminale e verifica che compaia la scritta **Creata:**. La frase **Processo completato** da sola non indica necessariamente che l'app sia stata creata.
+
+### L'icona dell'app mostra un simbolo di divieto
+
+L'app è incompleta oppure non è compatibile con il Mac. Elimina quella copia e avvia nuovamente **build-intel.command**.
+
+### L'app continua a chiedere l'autorizzazione
+
+Rimuovi la vecchia voce da Accessibilità con il pulsante `-`, poi aggiungi nuovamente l'app presente nella cartella Applicazioni usando il pulsante `+`. Assicurati che l'interruttore sia acceso.
+
+### I tasti non vengono bloccati
+
+Controlla che Blocco Tastiera sia abilitata sia in **Accessibilità** sia, quando presente, in **Monitoraggio input**. Poi chiudi e riapri l'app.
+
+## Disinstallazione
+
+1. Chiudi Blocco Tastiera.
+2. Sposta **Blocco Tastiera.app** dalla cartella Applicazioni al Cestino.
+3. Rimuovi la sua voce da Accessibilità e Monitoraggio input.
+
+L'app non installa servizi, estensioni o altri componenti nel sistema.
+
+## Compilazione con Xcode
+
+Questa sezione è destinata agli sviluppatori.
+
+1. Apri `KeyboardLock.xcodeproj` con Xcode 14.1 o successivo.
+2. Seleziona lo schema **KeyboardLock**.
+3. Seleziona **My Mac** come destinazione.
+4. Usa **Product > Build** oppure **Product > Archive**.
+
+Il progetto utilizza Swift e AppKit, ha deployment target macOS 13 ed è configurato per l'architettura `x86_64`. Non utilizza dipendenze esterne.
+
+## Privacy e sicurezza
+
+- Nessuna connessione di rete.
+- Nessuna telemetria.
+- Nessuna pubblicità.
+- Nessuna raccolta o memorizzazione dei tasti premuti.
+- Nessuna dipendenza esterna.
+- Codice sorgente disponibile nel progetto.
+
+Il blocco funziona nella sessione dell'utente. Alcune funzioni gestite direttamente dall'hardware o dal sistema operativo potrebbero non essere intercettabili.
