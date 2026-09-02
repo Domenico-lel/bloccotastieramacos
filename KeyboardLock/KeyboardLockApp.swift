@@ -10,10 +10,17 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
     private var statusLabel: NSTextField!
     private var detailLabel: NSTextField!
     private var actionButton: NSButton!
+    private var pointerModeCheckbox: NSButton!
+    private var durationPopup: NSPopUpButton!
     private var lockMenuItem: NSMenuItem!
+    private var fullCleanMenuItem: NSMenuItem!
     private var unlockMenuItem: NSMenuItem!
     private var countdownTimer: Timer?
+    private var automaticUnlockTimer: Timer?
     private var countdownValue = 3
+    private var remainingLockSeconds = 30
+    private var pendingBlocksPointer = false
+    private var lockedBlocksPointer = false
     private var state: State = .ready
     private let keyboardLock = KeyboardEventLock()
 
@@ -34,9 +41,11 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         }
         keyboardLock.onEscapeHoldChanged = { [weak self] isHolding in
             guard let self, self.state == .locked else { return }
-            self.detailLabel.stringValue = isHolding
-                ? "Continua a tenere premuto ESC per sbloccare…"
-                : "Mouse e trackpad restano attivi. ESC per 3 secondi in emergenza."
+            if isHolding {
+                self.detailLabel.stringValue = "Continua a tenere premuto ESC per sbloccare…"
+            } else {
+                self.updateInterface()
+            }
         }
 
         updateInterface()
@@ -47,12 +56,13 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ notification: Notification) {
         countdownTimer?.invalidate()
+        automaticUnlockTimer?.invalidate()
         keyboardLock.unlock()
     }
 
     private func buildInterface() {
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 500, height: 390),
+            contentRect: NSRect(x: 0, y: 0, width: 500, height: 470),
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered,
             defer: false
@@ -86,6 +96,30 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         detailLabel.alignment = .center
         detailLabel.maximumNumberOfLines = 2
 
+        pointerModeCheckbox = NSButton(
+            checkboxWithTitle: "Blocca anche mouse e trackpad",
+            target: self,
+            action: #selector(pointerModeChanged)
+        )
+        pointerModeCheckbox.font = .systemFont(ofSize: 14, weight: .medium)
+        pointerModeCheckbox.setAccessibilityLabel("Blocca anche mouse e trackpad")
+
+        let durationLabel = NSTextField(labelWithString: "Sblocco automatico dopo:")
+        durationLabel.textColor = .secondaryLabelColor
+
+        durationPopup = NSPopUpButton(frame: .zero, pullsDown: false)
+        durationPopup.addItems(withTitles: ["10 secondi", "20 secondi", "30 secondi", "60 secondi"])
+        durationPopup.selectItem(at: 2)
+        durationPopup.isEnabled = false
+        durationPopup.target = self
+        durationPopup.action = #selector(durationChanged)
+        durationPopup.setAccessibilityLabel("Durata della pulizia completa")
+
+        let durationRow = NSStackView(views: [durationLabel, durationPopup])
+        durationRow.orientation = .horizontal
+        durationRow.alignment = .centerY
+        durationRow.spacing = 10
+
         actionButton = NSButton(title: "BLOCCA TASTIERA", target: self, action: #selector(primaryAction))
         actionButton.bezelStyle = .rounded
         actionButton.controlSize = .large
@@ -95,7 +129,7 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.heightAnchor.constraint(equalToConstant: 52).isActive = true
 
-        let stack = NSStackView(views: [icon, title, statusLabel, detailLabel, actionButton])
+        let stack = NSStackView(views: [icon, title, statusLabel, detailLabel, pointerModeCheckbox, durationRow, actionButton])
         stack.orientation = .vertical
         stack.alignment = .centerX
         stack.spacing = 14
@@ -133,8 +167,10 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "Mostra Blocco Tastiera", action: #selector(showWindow), keyEquivalent: ""))
         menu.addItem(.separator())
         lockMenuItem = NSMenuItem(title: "Blocca tastiera…", action: #selector(beginCountdown), keyEquivalent: "")
+        fullCleanMenuItem = NSMenuItem(title: "Pulizia completa (30 secondi)…", action: #selector(beginFullCleanFromMenu), keyEquivalent: "")
         unlockMenuItem = NSMenuItem(title: "Sblocca", action: #selector(unlockKeyboard), keyEquivalent: "")
         menu.addItem(lockMenuItem)
+        menu.addItem(fullCleanMenuItem)
         menu.addItem(unlockMenuItem)
         menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: "Esci", action: #selector(quitApplication), keyEquivalent: "q"))
@@ -155,6 +191,22 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         }
     }
 
+    @objc private func pointerModeChanged() {
+        durationPopup.isEnabled = pointerModeCheckbox.state == .on
+        updateInterface()
+    }
+
+    @objc private func durationChanged() {
+        fullCleanMenuItem.title = "Pulizia completa (\(selectedDuration) secondi)…"
+    }
+
+    @objc private func beginFullCleanFromMenu() {
+        guard state == .ready else { return }
+        pointerModeCheckbox.state = .on
+        durationPopup.isEnabled = true
+        beginCountdown()
+    }
+
     @objc private func beginCountdown() {
         guard state == .ready else { return }
         guard requestAccessibilityPermission() else {
@@ -164,6 +216,7 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
 
         countdownTimer?.invalidate()
         countdownValue = 3
+        pendingBlocksPointer = pointerModeCheckbox.state == .on
         state = .countingDown
         updateInterface()
 
@@ -186,14 +239,21 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
     private func cancelCountdown() {
         countdownTimer?.invalidate()
         countdownTimer = nil
+        pendingBlocksPointer = false
         state = .ready
         updateInterface()
     }
 
     private func activateKeyboardLock() {
         do {
-            try keyboardLock.lock()
+            try keyboardLock.lock(blockPointer: pendingBlocksPointer)
+            lockedBlocksPointer = pendingBlocksPointer
             state = .locked
+            if lockedBlocksPointer {
+                remainingLockSeconds = selectedDuration
+                window.level = .floating
+                startAutomaticUnlockTimer()
+            }
             updateInterface()
         } catch {
             state = .ready
@@ -213,6 +273,11 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
     }
 
     private func finishUnlock(message: String) {
+        automaticUnlockTimer?.invalidate()
+        automaticUnlockTimer = nil
+        lockedBlocksPointer = false
+        pendingBlocksPointer = false
+        window.level = .normal
         state = .ready
         updateInterface()
         statusLabel.stringValue = message
@@ -220,8 +285,32 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
 
     @objc private func quitApplication() {
         countdownTimer?.invalidate()
+        automaticUnlockTimer?.invalidate()
         keyboardLock.unlock()
         NSApp.terminate(nil)
+    }
+
+    private var selectedDuration: Int {
+        [10, 20, 30, 60][max(0, durationPopup.indexOfSelectedItem)]
+    }
+
+    private func startAutomaticUnlockTimer() {
+        automaticUnlockTimer?.invalidate()
+        automaticUnlockTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let self, self.state == .locked, self.lockedBlocksPointer else {
+                timer.invalidate()
+                return
+            }
+            self.remainingLockSeconds -= 1
+            if self.remainingLockSeconds <= 0 {
+                timer.invalidate()
+                self.automaticUnlockTimer = nil
+                self.keyboardLock.unlock()
+                self.finishUnlock(message: "Pulizia completata")
+            } else {
+                self.updateInterface()
+            }
+        }
     }
 
     private func updateInterface() {
@@ -229,10 +318,16 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         case .ready:
             statusLabel.stringValue = "Tastiera attiva"
             statusLabel.textColor = .labelColor
-            detailLabel.stringValue = "Pronta per essere bloccata in sicurezza."
-            actionButton.title = "BLOCCA TASTIERA"
-            actionButton.setAccessibilityLabel("Blocca tastiera")
+            detailLabel.stringValue = pointerModeCheckbox.state == .on
+                ? "Pulizia completa: tastiera e puntatore, sempre con timer."
+                : "Pronta per bloccare soltanto la tastiera."
+            actionButton.title = pointerModeCheckbox.state == .on ? "AVVIA PULIZIA COMPLETA" : "BLOCCA TASTIERA"
+            actionButton.setAccessibilityLabel(pointerModeCheckbox.state == .on ? "Avvia pulizia completa" : "Blocca tastiera")
+            actionButton.isEnabled = true
+            pointerModeCheckbox.isEnabled = true
+            durationPopup.isEnabled = pointerModeCheckbox.state == .on
             lockMenuItem?.isEnabled = true
+            fullCleanMenuItem?.isEnabled = true
             unlockMenuItem?.isEnabled = false
             statusItem?.button?.image = NSImage(systemSymbolName: "keyboard", accessibilityDescription: "Tastiera attiva")
         case .countingDown:
@@ -241,16 +336,26 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
             detailLabel.stringValue = "Allontana le mani dalla tastiera oppure premi Annulla."
             actionButton.title = "ANNULLA"
             actionButton.setAccessibilityLabel("Annulla il blocco")
+            actionButton.isEnabled = true
+            pointerModeCheckbox.isEnabled = false
+            durationPopup.isEnabled = false
             lockMenuItem?.isEnabled = false
+            fullCleanMenuItem?.isEnabled = false
             unlockMenuItem?.isEnabled = false
             statusItem?.button?.image = NSImage(systemSymbolName: "timer", accessibilityDescription: "Blocco imminente")
         case .locked:
-            statusLabel.stringValue = "Tastiera bloccata"
+            statusLabel.stringValue = lockedBlocksPointer ? "Pulizia completa attiva" : "Tastiera bloccata"
             statusLabel.textColor = .systemRed
-            detailLabel.stringValue = "Mouse e trackpad restano attivi. ESC per 3 secondi in emergenza."
-            actionButton.title = "SBLOCCA"
+            detailLabel.stringValue = lockedBlocksPointer
+                ? "Sblocco automatico tra \(remainingLockSeconds) secondi. ESC per 3 secondi in emergenza."
+                : "Mouse e trackpad restano attivi. ESC per 3 secondi in emergenza."
+            actionButton.title = lockedBlocksPointer ? "BLOCCO COMPLETO ATTIVO" : "SBLOCCA"
             actionButton.setAccessibilityLabel("Sblocca tastiera")
+            actionButton.isEnabled = !lockedBlocksPointer
+            pointerModeCheckbox.isEnabled = false
+            durationPopup.isEnabled = false
             lockMenuItem?.isEnabled = false
+            fullCleanMenuItem?.isEnabled = false
             unlockMenuItem?.isEnabled = true
             statusItem?.button?.image = NSImage(systemSymbolName: "lock.fill", accessibilityDescription: "Tastiera bloccata")
         }

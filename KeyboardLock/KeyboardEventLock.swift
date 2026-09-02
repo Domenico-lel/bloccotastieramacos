@@ -18,21 +18,34 @@ final class KeyboardEventLock {
     private var escapeTimer: DispatchWorkItem?
     private var escapeIsDown = false
 
-    func lock() throws {
+    func lock(blockPointer: Bool = false) throws {
         guard eventTap == nil else { return }
 
-        let mask = (1 << CGEventType.keyDown.rawValue)
-            | (1 << CGEventType.keyUp.rawValue)
-            | (1 << CGEventType.flagsChanged.rawValue)
+        var mask = (CGEventMask(1) << CGEventType.keyDown.rawValue)
+            | (CGEventMask(1) << CGEventType.keyUp.rawValue)
+            | (CGEventMask(1) << CGEventType.flagsChanged.rawValue)
             // CGEvent uses raw event type 14 for NX_SYSDEFINED media keys,
             // although CoreGraphics does not expose a named Swift case for it.
-            | (1 << 14)
+            | (CGEventMask(1) << 14)
+
+        if blockPointer {
+            let pointerEvents: [CGEventType] = [
+                .leftMouseDown, .leftMouseUp,
+                .rightMouseDown, .rightMouseUp,
+                .mouseMoved, .leftMouseDragged, .rightMouseDragged,
+                .scrollWheel,
+                .otherMouseDown, .otherMouseUp, .otherMouseDragged
+            ]
+            for eventType in pointerEvents {
+                mask |= CGEventMask(1) << eventType.rawValue
+            }
+        }
 
         guard let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
-            eventsOfInterest: CGEventMask(mask),
+            eventsOfInterest: mask,
             callback: KeyboardEventLock.callback,
             userInfo: Unmanaged.passUnretained(self).toOpaque()
         ) else {
@@ -72,7 +85,8 @@ final class KeyboardEventLock {
         }
 
         // 53 is the hardware-independent virtual key code for Escape on macOS.
-        if event.getIntegerValueField(.keyboardEventKeycode) == 53 {
+        if (type == .keyDown || type == .keyUp),
+           event.getIntegerValueField(.keyboardEventKeycode) == 53 {
             if type == .keyDown && !escapeIsDown {
                 escapeIsDown = true
                 DispatchQueue.main.async { [weak self] in
@@ -90,8 +104,7 @@ final class KeyboardEventLock {
             }
         }
 
-        // Returning nil also discards media/function-key events (volume, brightness,
-        // playback, Mission Control, and similar). Pointer events are not in the mask.
+        // Returning nil discards every event included in the active mask.
         return nil
     }
 

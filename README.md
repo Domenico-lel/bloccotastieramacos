@@ -12,6 +12,8 @@ Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci
 
 Prima del blocco parte un conto alla rovescia di 3 secondi, che puoi annullare. L'icona nella barra dei menu permette inoltre di mostrare l'app, bloccare, sbloccare o uscire in qualsiasi momento usando mouse o trackpad.
 
+La modalità **Pulizia completa** blocca temporaneamente anche mouse e trackpad. Per sicurezza funziona sempre con uno sblocco automatico impostabile a 10, 20, 30 o 60 secondi.
+
 L'app non usa Internet, non raccoglie dati e non contiene pubblicità.
 
 ## Compatibilità
@@ -103,6 +105,21 @@ Puoi anche usare l'icona nella barra dei menu, nella parte superiore dello scher
 - **Blocca tastiera…** avvia il conto alla rovescia;
 - **Sblocca** riattiva immediatamente i tasti;
 - **Esci** chiude l'app e assicura lo sblocco della tastiera.
+
+## Pulizia completa: tastiera e trackpad
+
+Questa modalità serve quando vuoi pulire anche il trackpad.
+
+1. Seleziona **Blocca anche mouse e trackpad**.
+2. Scegli una durata: 10, 20, 30 oppure 60 secondi.
+3. Premi **AVVIA PULIZIA COMPLETA**.
+4. Durante i 3 secondi iniziali puoi ancora premere **Annulla**.
+5. Dopo il blocco, aspetta il tempo mostrato nella finestra.
+6. Tastiera e puntatore si riattiveranno automaticamente.
+
+Durante la pulizia completa vengono bloccati sia il trackpad sia eventuali mouse collegati. Non è possibile usare il pulsante o il menu mentre il puntatore è bloccato. Se devi interrompere prima del termine, tieni premuto **ESC per 3 secondi**.
+
+Per sicurezza, la modalità completa non permette un blocco senza timer. Anche la chiusura o l'arresto dell'app rimuovono il filtro degli eventi.
 
 ## Aggiornare l'app
 
