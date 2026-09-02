@@ -3,9 +3,15 @@ import CoreGraphics
 
 enum KeyboardLockError: LocalizedError {
     case eventTapUnavailable
+    case pointerControlUnavailable
 
     var errorDescription: String? {
-        "macOS non ha consentito l'intercettazione degli eventi. Controlla i permessi Accessibilità e Monitoraggio input, quindi riapri l'app."
+        switch self {
+        case .eventTapUnavailable:
+            return "macOS non ha consentito l'intercettazione degli eventi. Controlla i permessi Accessibilità e Monitoraggio input, quindi riapri l'app."
+        case .pointerControlUnavailable:
+            return "macOS non ha consentito di bloccare il puntatore. Controlla Accessibilità e Monitoraggio input, quindi chiudi e riapri l'app."
+        }
     }
 }
 
@@ -17,6 +23,7 @@ final class KeyboardEventLock {
     private var runLoopSource: CFRunLoopSource?
     private var escapeTimer: DispatchWorkItem?
     private var escapeIsDown = false
+    private var pointerIsBlocked = false
 
     func lock(blockPointer: Bool = false) throws {
         guard eventTap == nil else { return }
@@ -71,10 +78,26 @@ final class KeyboardEventLock {
         runLoopSource = source
         CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
         CGEvent.tapEnable(tap: tap, enable: true)
+
+        if blockPointer {
+            // Dropping mouseMoved events is not sufficient on every Intel/OCLP
+            // configuration: explicitly detach physical pointer movement from the
+            // on-screen cursor. Clicks, scrolling and gestures remain blocked by
+            // the event tap above.
+            guard CGAssociateMouseAndMouseCursorPosition(boolean_t(0)) == .success else {
+                unlock()
+                throw KeyboardLockError.pointerControlUnavailable
+            }
+            pointerIsBlocked = true
+        }
     }
 
     func unlock() {
         cancelEmergencyUnlock()
+        if pointerIsBlocked {
+            CGAssociateMouseAndMouseCursorPosition(boolean_t(1))
+            pointerIsBlocked = false
+        }
         if let source = runLoopSource {
             CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
         }
