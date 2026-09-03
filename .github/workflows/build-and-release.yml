@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build all versions
         run: |
@@ -31,9 +31,9 @@ jobs:
           arm_app="build-apple-silicon/Blocco Tastiera.app"
           universal_app="build-universal/Blocco Tastiera.app"
 
-          lipo -verify_arch x86_64 "$intel_app/Contents/MacOS/Blocco Tastiera"
-          lipo -verify_arch arm64 "$arm_app/Contents/MacOS/Blocco Tastiera"
-          lipo -verify_arch x86_64 arm64 "$universal_app/Contents/MacOS/Blocco Tastiera"
+          lipo "$intel_app/Contents/MacOS/Blocco Tastiera" -verify_arch x86_64
+          lipo "$arm_app/Contents/MacOS/Blocco Tastiera" -verify_arch arm64
+          lipo "$universal_app/Contents/MacOS/Blocco Tastiera" -verify_arch x86_64 arm64
 
           codesign --verify --deep --strict "$intel_app"
           codesign --verify --deep --strict "$arm_app"
