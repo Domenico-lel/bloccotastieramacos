@@ -8,15 +8,11 @@
 
 ## Download
 
-Scarica l'app già pronta. **Non servono Xcode, Terminale o la compilazione del codice.**
+Scarica l'app già pronta. **C'è un solo installer e funziona su tutti i Mac compatibili.**
 
-| Il tuo Mac | Download |
-| --- | --- |
-| Mac con chip **Apple M1, M2, M3, M4 o successivo** | [![Download Apple Silicon](https://img.shields.io/badge/Download-Apple%20Silicon-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.dmg) |
-| Mac con processore **Intel** | [![Download Intel](https://img.shields.io/badge/Download-Intel-0071C5?style=for-the-badge&logo=intel&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.dmg) |
-| Non sai quale scegliere? | [![Download Universale](https://img.shields.io/badge/Download-Universale-34C759?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.dmg) |
+[![Scarica iBlock per macOS](https://img.shields.io/badge/SCARICA-iBlock%20per%20macOS-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.dmg)
 
-> **Non sai che processore possiedi?** Scarica la versione **Universale**: funziona sia sui Mac Intel sia sui Mac Apple Silicon.
+Il file corretto si chiama **iBlock-Universale.dmg**. Funziona sia sui Mac Intel sia sui Mac Apple Silicon.
 
 [Visualizza tutte le versioni pubblicate](https://github.com/Domenico-lel/bloccotastieramacos/releases)
 
@@ -47,23 +43,17 @@ Questa versione è compatibile con:
 
 ## Installazione facile
 
-Non servono Xcode o Terminale. Usa uno dei pulsanti nella sezione [Download](#download) oppure apri la pagina [Releases](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest):
-
-- [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.dmg)
-- [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.dmg)
-- [Universale — funziona su entrambi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.dmg)
-
-Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informazioni su questo Mac**. Se compare **Chip Apple**, scegli Apple Silicon. Se compare **Processore Intel**, scegli Intel. La versione Universale è sempre una scelta sicura.
+Non servono Xcode o Terminale. Premi il pulsante nella sezione [Download](#download) per scaricare **iBlock-Universale.dmg**, compatibile sia con Intel sia con Apple Silicon.
 
 ### Passaggi
 
-1. Scarica uno dei tre file DMG indicati sopra.
+1. Scarica **iBlock-Universale.dmg**.
 2. Apri il file DMG scaricato.
 3. Nella finestra che compare, trascina **iBlock** sull'icona **Applicazioni**.
 4. Attendi la fine della copia, poi espelli **Installa iBlock** dalla barra laterale del Finder.
 5. Apri iBlock dalla cartella Applicazioni e segui la sezione **Primo avvio** qui sotto.
 
-Nella pagina Releases restano disponibili anche i file ZIP per chi li preferisce.
+Nella pagina Releases, non scaricare i file chiamati **Source code**: servono soltanto agli sviluppatori.
 
 ## Compilazione manuale con gli script
 
