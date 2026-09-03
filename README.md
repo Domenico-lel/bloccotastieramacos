@@ -2,6 +2,22 @@
 
 **Blocco Tastiera** è una piccola applicazione gratuita per macOS.
 
+## Download
+
+Scarica l'app già pronta. **Non servono Xcode, Terminale o la compilazione del codice.**
+
+| Il tuo Mac | Download |
+| --- | --- |
+| Mac con chip **Apple M1, M2, M3, M4 o successivo** | [![Download Apple Silicon](https://img.shields.io/badge/Download-Apple%20Silicon-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Apple-Silicon.zip) |
+| Mac con processore **Intel** | [![Download Intel](https://img.shields.io/badge/Download-Intel-0071C5?style=for-the-badge&logo=intel&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Intel.zip) |
+| Non sai quale scegliere? | [![Download Universale](https://img.shields.io/badge/Download-Universale-34C759?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Universale.zip) |
+
+> **Non sai che processore possiedi?** Scarica la versione **Universale**: funziona sia sui Mac Intel sia sui Mac Apple Silicon.
+
+[Visualizza tutte le versioni pubblicate](https://github.com/Domenico-lel/bloccotastieramacos/releases)
+
+Dopo il download, apri il file ZIP e trascina **Blocco Tastiera.app** nella cartella **Applicazioni**. Le istruzioni complete sono disponibili nella sezione [Installazione facile](#installazione-facile).
+
 Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci. Quando il blocco è attivo:
 
 - i tasti normali non funzionano;
@@ -27,7 +43,7 @@ Questa versione è compatibile con:
 
 ## Installazione facile
 
-Non servono Xcode o Terminale. Scarica la versione adatta al tuo Mac dalla pagina [Releases](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest):
+Non servono Xcode o Terminale. Usa uno dei pulsanti nella sezione [Download](#download) oppure apri la pagina [Releases](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest):
 
 - [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Apple-Silicon.zip)
 - [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Intel.zip)
@@ -117,7 +133,7 @@ Per sicurezza, la modalità completa non permette un blocco senza timer. Anche l
 ## Aggiornare l'app
 
 1. Chiudi la versione attuale.
-2. Scarica e compila la nuova versione.
+2. Scarica la nuova versione dalla sezione [Download](#download).
 3. Trascina la nuova **Blocco Tastiera.app** nella cartella Applicazioni.
 4. Quando Finder lo chiede, seleziona **Sostituisci**.
 
