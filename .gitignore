@@ -3,6 +3,7 @@ build/
 build-apple-silicon/
 build-universal/
 DerivedData/
+.tool-cache/
 *.xcuserstate
 xcuserdata/
 *.zip

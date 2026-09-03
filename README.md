@@ -1,6 +1,10 @@
-# Blocco Tastiera
+# iBlock
 
-**Blocco Tastiera** è una piccola applicazione gratuita per macOS.
+<p align="center">
+  <img src="Artwork/AppIcon.png" width="180" alt="Icona di iBlock">
+</p>
+
+**iBlock** è una piccola applicazione gratuita per macOS.
 
 ## Download
 
@@ -8,15 +12,15 @@ Scarica l'app già pronta. **Non servono Xcode, Terminale o la compilazione del 
 
 | Il tuo Mac | Download |
 | --- | --- |
-| Mac con chip **Apple M1, M2, M3, M4 o successivo** | [![Download Apple Silicon](https://img.shields.io/badge/Download-Apple%20Silicon-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Apple-Silicon.zip) |
-| Mac con processore **Intel** | [![Download Intel](https://img.shields.io/badge/Download-Intel-0071C5?style=for-the-badge&logo=intel&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Intel.zip) |
-| Non sai quale scegliere? | [![Download Universale](https://img.shields.io/badge/Download-Universale-34C759?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Universale.zip) |
+| Mac con chip **Apple M1, M2, M3, M4 o successivo** | [![Download Apple Silicon](https://img.shields.io/badge/Download-Apple%20Silicon-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.zip) |
+| Mac con processore **Intel** | [![Download Intel](https://img.shields.io/badge/Download-Intel-0071C5?style=for-the-badge&logo=intel&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.zip) |
+| Non sai quale scegliere? | [![Download Universale](https://img.shields.io/badge/Download-Universale-34C759?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.zip) |
 
 > **Non sai che processore possiedi?** Scarica la versione **Universale**: funziona sia sui Mac Intel sia sui Mac Apple Silicon.
 
 [Visualizza tutte le versioni pubblicate](https://github.com/Domenico-lel/bloccotastieramacos/releases)
 
-Dopo il download, apri il file ZIP e trascina **Blocco Tastiera.app** nella cartella **Applicazioni**. Le istruzioni complete sono disponibili nella sezione [Installazione facile](#installazione-facile).
+Dopo il download, apri il file ZIP e trascina **iBlock.app** nella cartella **Applicazioni**. Le istruzioni complete sono disponibili nella sezione [Installazione facile](#installazione-facile).
 
 Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci. Quando il blocco è attivo:
 
@@ -45,9 +49,9 @@ Questa versione è compatibile con:
 
 Non servono Xcode o Terminale. Usa uno dei pulsanti nella sezione [Download](#download) oppure apri la pagina [Releases](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest):
 
-- [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Apple-Silicon.zip)
-- [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Intel.zip)
-- [Universale — funziona su entrambi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Universale.zip)
+- [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.zip)
+- [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.zip)
+- [Universale — funziona su entrambi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.zip)
 
 Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informazioni su questo Mac**. Se compare **Chip Apple**, scegli Apple Silicon. Se compare **Processore Intel**, scegli Intel. La versione Universale è sempre una scelta sicura.
 
@@ -55,7 +59,7 @@ Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informaz
 
 1. Scarica uno dei tre file ZIP indicati sopra.
 2. Fai doppio clic sul file ZIP per estrarlo.
-3. Trascina **Blocco Tastiera.app** nella cartella **Applicazioni**.
+3. Trascina **iBlock.app** nella cartella **Applicazioni**.
 4. Segui la sezione **Primo avvio** qui sotto.
 
 ## Compilazione manuale con gli script
@@ -76,7 +80,7 @@ Al primo utilizzo dello script, macOS potrebbe chiederti di installare gli strum
 macOS potrebbe bloccare il primo avvio perché l'app non è distribuita tramite App Store.
 
 1. Apri la cartella **Applicazioni**.
-2. Fai clic destro su **Blocco Tastiera**.
+2. Fai clic destro su **iBlock**.
 3. Seleziona **Apri**.
 4. Nella finestra successiva premi ancora **Apri**.
 
@@ -86,21 +90,21 @@ Non è necessario disattivare le protezioni di macOS.
 
 L'app ha bisogno dell'autorizzazione Accessibilità per fermare i tasti.
 
-1. Apri **Blocco Tastiera**.
+1. Apri **iBlock**.
 2. Premi **BLOCCA TASTIERA**.
 3. Quando macOS mostra la richiesta, apri **Impostazioni di Sistema**.
 4. Vai in **Privacy e sicurezza**.
 5. Apri **Accessibilità**.
-6. Attiva l'interruttore accanto a **Blocco Tastiera**.
+6. Attiva l'interruttore accanto a **iBlock**.
 7. Se l'app non compare, premi il pulsante `+` e selezionala dalla cartella Applicazioni.
 8. Controlla anche **Privacy e sicurezza > Monitoraggio input** e abilita l'app se richiesto.
-9. Chiudi completamente Blocco Tastiera e riaprila.
+9. Chiudi completamente iBlock e riaprila.
 
 Queste autorizzazioni permettono soltanto all'app di intercettare i tasti. L'app non registra e non salva ciò che digiti.
 
 ## Come si usa
 
-1. Apri **Blocco Tastiera**.
+1. Apri **iBlock**.
 2. Premi **BLOCCA TASTIERA**.
 3. Attendi il conto alla rovescia di 3 secondi. Premi **Annulla** se hai cambiato idea.
 4. Pulisci la tastiera usando il mouse o il trackpad quando necessario.
@@ -110,7 +114,7 @@ Se non riesci a premere il pulsante, tieni premuto il tasto **ESC per 3 secondi*
 
 Puoi anche usare l'icona nella barra dei menu, nella parte superiore dello schermo:
 
-- **Mostra Blocco Tastiera** riapre la finestra;
+- **Mostra iBlock** riapre la finestra;
 - **Blocca tastiera…** avvia il conto alla rovescia;
 - **Sblocca** riattiva immediatamente i tasti;
 - **Esci** chiude l'app e assicura lo sblocco della tastiera.
@@ -134,13 +138,15 @@ Per sicurezza, la modalità completa non permette un blocco senza timer. Anche l
 
 1. Chiudi la versione attuale.
 2. Scarica la nuova versione dalla sezione [Download](#download).
-3. Trascina la nuova **Blocco Tastiera.app** nella cartella Applicazioni.
+3. Trascina la nuova **iBlock.app** nella cartella Applicazioni.
 4. Quando Finder lo chiede, seleziona **Sostituisci**.
+
+Se possiedi una versione precedente chiamata **Blocco Tastiera.app**, elimina quella vecchia dopo aver installato **iBlock.app**. Il cambio di nome può richiedere di concedere nuovamente le autorizzazioni indicate qui sotto.
 
 Dopo un aggiornamento, macOS potrebbe chiedere nuovamente le autorizzazioni. In questo caso:
 
 1. Vai in **Privacy e sicurezza > Accessibilità**.
-2. Seleziona la vecchia voce **Blocco Tastiera** e premi `-`.
+2. Seleziona la vecchia voce **iBlock** e premi `-`.
 3. Premi `+` e aggiungi la nuova app dalla cartella Applicazioni.
 4. Ripeti gli stessi passaggi in **Monitoraggio input**, se necessario.
 
@@ -160,12 +166,12 @@ Rimuovi la vecchia voce da Accessibilità con il pulsante `-`, poi aggiungi nuov
 
 ### I tasti non vengono bloccati
 
-Controlla che Blocco Tastiera sia abilitata sia in **Accessibilità** sia, quando presente, in **Monitoraggio input**. Poi chiudi e riapri l'app.
+Controlla che iBlock sia abilitata sia in **Accessibilità** sia, quando presente, in **Monitoraggio input**. Poi chiudi e riapri l'app.
 
 ## Disinstallazione
 
-1. Chiudi Blocco Tastiera.
-2. Sposta **Blocco Tastiera.app** dalla cartella Applicazioni al Cestino.
+1. Chiudi iBlock.
+2. Sposta **iBlock.app** dalla cartella Applicazioni al Cestino.
 3. Rimuovi la sua voce da Accessibilità e Monitoraggio input.
 
 L'app non installa servizi, estensioni o altri componenti nel sistema.

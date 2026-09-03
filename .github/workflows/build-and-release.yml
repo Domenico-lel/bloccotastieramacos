@@ -27,13 +27,13 @@ jobs:
 
       - name: Verify architectures and signatures
         run: |
-          intel_app="build/Blocco Tastiera.app"
-          arm_app="build-apple-silicon/Blocco Tastiera.app"
-          universal_app="build-universal/Blocco Tastiera.app"
+          intel_app="build/iBlock.app"
+          arm_app="build-apple-silicon/iBlock.app"
+          universal_app="build-universal/iBlock.app"
 
-          lipo "$intel_app/Contents/MacOS/Blocco Tastiera" -verify_arch x86_64
-          lipo "$arm_app/Contents/MacOS/Blocco Tastiera" -verify_arch arm64
-          lipo "$universal_app/Contents/MacOS/Blocco Tastiera" -verify_arch x86_64 arm64
+          lipo "$intel_app/Contents/MacOS/iBlock" -verify_arch x86_64
+          lipo "$arm_app/Contents/MacOS/iBlock" -verify_arch arm64
+          lipo "$universal_app/Contents/MacOS/iBlock" -verify_arch x86_64 arm64
 
           codesign --verify --deep --strict "$intel_app"
           codesign --verify --deep --strict "$arm_app"
@@ -42,20 +42,20 @@ jobs:
       - name: Upload Intel download
         uses: actions/upload-artifact@v4
         with:
-          name: Blocco-Tastiera-Intel
-          path: build/Blocco-Tastiera-Intel.zip
+          name: iBlock-Intel
+          path: build/iBlock-Intel.zip
 
       - name: Upload Apple Silicon download
         uses: actions/upload-artifact@v4
         with:
-          name: Blocco-Tastiera-Apple-Silicon
-          path: build-apple-silicon/Blocco-Tastiera-Apple-Silicon.zip
+          name: iBlock-Apple-Silicon
+          path: build-apple-silicon/iBlock-Apple-Silicon.zip
 
       - name: Upload Universal download
         uses: actions/upload-artifact@v4
         with:
-          name: Blocco-Tastiera-Universale
-          path: build-universal/Blocco-Tastiera-Universale.zip
+          name: iBlock-Universale
+          path: build-universal/iBlock-Universale.zip
 
       - name: Publish GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
@@ -63,8 +63,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            build/Blocco-Tastiera-Intel.zip \
-            build-apple-silicon/Blocco-Tastiera-Apple-Silicon.zip \
-            build-universal/Blocco-Tastiera-Universale.zip \
-            --title "Blocco Tastiera $GITHUB_REF_NAME" \
+            build/iBlock-Intel.zip \
+            build-apple-silicon/iBlock-Apple-Silicon.zip \
+            build-universal/iBlock-Universale.zip \
+            --title "iBlock $GITHUB_REF_NAME" \
             --generate-notes

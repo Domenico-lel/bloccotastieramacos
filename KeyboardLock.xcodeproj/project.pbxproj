@@ -6,23 +6,25 @@
 	objects = {
 		A1 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLockApp.swift; sourceTree = "<group>";};
 		A2 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventLock.swift; sourceTree = "<group>";};
-		A3 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blocco Tastiera.app"; sourceTree = BUILT_PRODUCTS_DIR;};
+		A3 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBlock.app; sourceTree = BUILT_PRODUCTS_DIR;};
+		A4 = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>";};
 		B1 = {isa = PBXBuildFile; fileRef = A1;};
 		B2 = {isa = PBXBuildFile; fileRef = A2;};
+		B3 = {isa = PBXBuildFile; fileRef = A4;};
 		C1 = {isa = PBXGroup; children = (C2, C3); sourceTree = "<group>";};
-		C2 = {isa = PBXGroup; children = (A1, A2); path = KeyboardLock; sourceTree = "<group>";};
+		C2 = {isa = PBXGroup; children = (A1, A2, A4); path = KeyboardLock; sourceTree = "<group>";};
 		C3 = {isa = PBXGroup; children = (A3); name = Products; sourceTree = "<group>";};
 		D1 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (B1, B2); runOnlyForDeploymentPostprocessing = 0;};
 		D2 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
-		D3 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
-		E1 = {isa = PBXNativeTarget; buildConfigurationList = G2; buildPhases = (D1, D2, D3); buildRules = (); dependencies = (); name = KeyboardLock; productName = "Blocco Tastiera"; productReference = A3; productType = "com.apple.product-type.application";};
+		D3 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (B3); runOnlyForDeploymentPostprocessing = 0;};
+		E1 = {isa = PBXNativeTarget; buildConfigurationList = G2; buildPhases = (D1, D2, D3); buildRules = (); dependencies = (); name = KeyboardLock; productName = iBlock; productReference = A3; productType = "com.apple.product-type.application";};
 		F1 = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = YES; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600;}; buildConfigurationList = G1; compatibilityVersion = "Xcode 14.0"; developmentRegion = it; hasScannedForEncodings = 0; knownRegions = (it, Base); mainGroup = C1; productRefGroup = C3; projectDirPath = ""; projectRoot = ""; targets = (E1);};
 		G1 = {isa = XCConfigurationList; buildConfigurations = (H1, H2); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
 		G2 = {isa = XCConfigurationList; buildConfigurations = (H3, H4); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
 		H1 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; MACOSX_DEPLOYMENT_TARGET = 13.0; SDKROOT = macosx; SWIFT_VERSION = 5.0;}; name = Debug;};
 		H2 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; MACOSX_DEPLOYMENT_TARGET = 13.0; SDKROOT = macosx; SWIFT_VERSION = 5.0;}; name = Release;};
-		H3 = {isa = XCBuildConfiguration; buildSettings = {ARCHS = "x86_64 arm64"; CODE_SIGN_IDENTITY = "-"; CODE_SIGN_STYLE = Manual; CURRENT_PROJECT_VERSION = 7; DEBUG_INFORMATION_FORMAT = dwarf; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = KeyboardLock/Info.plist; MACOSX_DEPLOYMENT_TARGET = 13.0; ONLY_ACTIVE_ARCH = NO; PRODUCT_BUNDLE_IDENTIFIER = com.local.KeyboardLock; PRODUCT_NAME = "Blocco Tastiera"; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; SWIFT_VERSION = 5.0;}; name = Debug;};
-		H4 = {isa = XCBuildConfiguration; buildSettings = {ARCHS = "x86_64 arm64"; CODE_SIGN_IDENTITY = "-"; CODE_SIGN_STYLE = Manual; CURRENT_PROJECT_VERSION = 7; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = KeyboardLock/Info.plist; MACOSX_DEPLOYMENT_TARGET = 13.0; ONLY_ACTIVE_ARCH = NO; PRODUCT_BUNDLE_IDENTIFIER = com.local.KeyboardLock; PRODUCT_NAME = "Blocco Tastiera"; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_VERSION = 5.0;}; name = Release;};
+		H3 = {isa = XCBuildConfiguration; buildSettings = {ARCHS = "x86_64 arm64"; CODE_SIGN_IDENTITY = "-"; CODE_SIGN_STYLE = Manual; CURRENT_PROJECT_VERSION = 8; DEBUG_INFORMATION_FORMAT = dwarf; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = KeyboardLock/Info.plist; MACOSX_DEPLOYMENT_TARGET = 13.0; ONLY_ACTIVE_ARCH = NO; PRODUCT_BUNDLE_IDENTIFIER = it.domenicolella.iblock; PRODUCT_NAME = iBlock; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; SWIFT_VERSION = 5.0;}; name = Debug;};
+		H4 = {isa = XCBuildConfiguration; buildSettings = {ARCHS = "x86_64 arm64"; CODE_SIGN_IDENTITY = "-"; CODE_SIGN_STYLE = Manual; CURRENT_PROJECT_VERSION = 8; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = KeyboardLock/Info.plist; MACOSX_DEPLOYMENT_TARGET = 13.0; ONLY_ACTIVE_ARCH = NO; PRODUCT_BUNDLE_IDENTIFIER = it.domenicolella.iblock; PRODUCT_NAME = iBlock; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_VERSION = 5.0;}; name = Release;};
 	};
 	rootObject = F1;
 }

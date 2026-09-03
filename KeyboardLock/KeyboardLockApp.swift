@@ -67,7 +67,7 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
             backing: .buffered,
             defer: false
         )
-        window.title = "Blocco Tastiera"
+        window.title = "iBlock"
         window.center()
         window.isReleasedWhenClosed = false
         window.titlebarAppearsTransparent = true
@@ -81,7 +81,7 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
             icon.heightAnchor.constraint(equalToConstant: 82)
         ])
 
-        let title = NSTextField(labelWithString: "Blocco Tastiera")
+        let title = NSTextField(labelWithString: "iBlock")
         title.font = .systemFont(ofSize: 28, weight: .bold)
         title.alignment = .center
 
@@ -161,10 +161,10 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
 
     private func buildStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem.button?.image = NSImage(systemSymbolName: "keyboard", accessibilityDescription: "Blocco Tastiera")
+        statusItem.button?.image = NSImage(systemSymbolName: "keyboard", accessibilityDescription: "iBlock")
 
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Mostra Blocco Tastiera", action: #selector(showWindow), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Mostra iBlock", action: #selector(showWindow), keyEquivalent: ""))
         menu.addItem(.separator())
         lockMenuItem = NSMenuItem(title: "Blocca tastiera…", action: #selector(beginCountdown), keyEquivalent: "")
         fullCleanMenuItem = NSMenuItem(title: "Pulizia completa (30 secondi)…", action: #selector(beginFullCleanFromMenu), keyEquivalent: "")
@@ -370,7 +370,7 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         let alert = NSAlert()
         alert.alertStyle = .warning
         alert.messageText = "Autorizzazione necessaria"
-        alert.informativeText = "Abilita Blocco Tastiera in Impostazioni di Sistema > Privacy e sicurezza > Accessibilità. Se richiesto, abilitala anche in Monitoraggio input."
+        alert.informativeText = "Abilita iBlock in Impostazioni di Sistema > Privacy e sicurezza > Accessibilità. Se richiesto, abilitala anche in Monitoraggio input."
         alert.addButton(withTitle: "Apri Accessibilità")
         alert.addButton(withTitle: "OK")
         if alert.runModal() == .alertFirstButtonReturn,
