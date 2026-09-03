@@ -6,7 +6,7 @@ Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci
 
 - i tasti normali non funzionano;
 - i tasti di volume, luminosità e riproduzione vengono bloccati;
-- mouse e trackpad continuano a funzionare;
+- mouse e trackpad continuano a funzionare nella modalità tastiera;
 - puoi sbloccare tutto con il pulsante **Sblocca**;
 - in emergenza puoi tenere premuto **ESC per 3 secondi**.
 
@@ -18,13 +18,12 @@ L'app non usa Internet, non raccoglie dati e non contiene pubblicità.
 
 ## Compatibilità
 
-Questa versione è pensata per:
+Questa versione è compatibile con:
 
-- Mac con processore Intel;
+- Mac con processore Intel (`x86_64`);
+- Mac con processore Apple Silicon (`arm64`), inclusi M1, M2, M3, M4 e successivi;
 - macOS 13 Ventura;
 - Mac non ufficialmente supportati che utilizzano OpenCore Legacy Patcher.
-
-Non è stata preparata per Mac con processore Apple Silicon (M1, M2, M3 o successivi).
 
 ## Installazione facile
 
@@ -36,9 +35,17 @@ Segui i passaggi nell'ordine indicato.
 2. Apri il file scaricato per estrarlo.
 3. Apri la cartella **Blocco-Tastiera-Progetto**.
 
-### 2. Crea l'applicazione
+### 2. Scegli il file corretto
 
-1. Cerca il file **build-intel.command**.
+- Su un Mac Apple Silicon, usa **build-apple-silicon.command**.
+- Su un Mac Intel, usa **build-intel.command**.
+- Per creare una sola app compatibile con entrambi, usa **build-universal.command**.
+
+Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informazioni su questo Mac**. Se compare la voce **Chip Apple**, usa Apple Silicon. Se compare **Processore Intel**, usa Intel.
+
+### 3. Crea l'applicazione
+
+1. Cerca il file `.command` scelto nel passaggio precedente.
 2. Fai clic destro sul file.
 3. Seleziona **Apri**.
 4. Se macOS mostra un avviso, premi nuovamente **Apri**.
@@ -49,14 +56,14 @@ Al primo utilizzo, macOS potrebbe chiederti di installare gli strumenti Apple:
 
 1. Accetta l'installazione.
 2. Aspetta che finisca.
-3. Apri nuovamente **build-intel.command**.
+3. Apri nuovamente lo stesso file `.command`.
 
 La procedura è riuscita solo quando nel Terminale compare una riga che inizia con **Creata:**.
 
-### 3. Sposta l'app in Applicazioni
+### 4. Sposta l'app in Applicazioni
 
 1. Torna nella cartella del progetto.
-2. Apri la nuova cartella **build**.
+2. Apri la cartella creata dallo script: **build**, **build-apple-silicon** oppure **build-universal**.
 3. Trova **Blocco Tastiera.app**.
 4. Trascina l'app nella cartella **Applicazioni** del Mac.
 
@@ -143,7 +150,7 @@ La compilazione non è terminata correttamente. Leggi il messaggio nel Terminale
 
 ### L'icona dell'app mostra un simbolo di divieto
 
-L'app è incompleta oppure non è compatibile con il Mac. Elimina quella copia e avvia nuovamente **build-intel.command**.
+L'app è incompleta oppure non è compatibile con il Mac. Elimina quella copia e avvia nuovamente lo script corretto per il tuo processore. Se vuoi evitare errori di architettura, usa **build-universal.command**.
 
 ### L'app continua a chiedere l'autorizzazione
 
@@ -170,7 +177,7 @@ Questa sezione è destinata agli sviluppatori.
 3. Seleziona **My Mac** come destinazione.
 4. Usa **Product > Build** oppure **Product > Archive**.
 
-Il progetto utilizza Swift e AppKit, ha deployment target macOS 13 ed è configurato per l'architettura `x86_64`. Non utilizza dipendenze esterne.
+Il progetto utilizza Swift e AppKit, ha deployment target macOS 13 ed è configurato per le architetture `x86_64` e `arm64`. Non utilizza dipendenze esterne.
 
 ## Privacy e sicurezza
 
