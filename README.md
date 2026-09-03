@@ -27,47 +27,33 @@ Questa versione è compatibile con:
 
 ## Installazione facile
 
-Segui i passaggi nell'ordine indicato.
+Non servono Xcode o Terminale. Scarica la versione adatta al tuo Mac dalla pagina [Releases](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest):
 
-### 1. Scarica e apri il progetto
+- [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Apple-Silicon.zip)
+- [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Intel.zip)
+- [Universale — funziona su entrambi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/Blocco-Tastiera-Universale.zip)
 
-1. Scarica il progetto da GitHub.
-2. Apri il file scaricato per estrarlo.
-3. Apri la cartella **Blocco-Tastiera-Progetto**.
+Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informazioni su questo Mac**. Se compare **Chip Apple**, scegli Apple Silicon. Se compare **Processore Intel**, scegli Intel. La versione Universale è sempre una scelta sicura.
 
-### 2. Scegli il file corretto
+### Passaggi
 
-- Su un Mac Apple Silicon, usa **build-apple-silicon.command**.
-- Su un Mac Intel, usa **build-intel.command**.
-- Per creare una sola app compatibile con entrambi, usa **build-universal.command**.
+1. Scarica uno dei tre file ZIP indicati sopra.
+2. Fai doppio clic sul file ZIP per estrarlo.
+3. Trascina **Blocco Tastiera.app** nella cartella **Applicazioni**.
+4. Segui la sezione **Primo avvio** qui sotto.
 
-Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informazioni su questo Mac**. Se compare la voce **Chip Apple**, usa Apple Silicon. Se compare **Processore Intel**, usa Intel.
+## Compilazione manuale con gli script
 
-### 3. Crea l'applicazione
+Questa procedura è destinata a chi vuole compilare personalmente il codice sorgente.
 
-1. Cerca il file `.command` scelto nel passaggio precedente.
-2. Fai clic destro sul file.
-3. Seleziona **Apri**.
+1. Scarica il codice sorgente da GitHub e apri la cartella.
+2. Scegli **build-apple-silicon.command**, **build-intel.command** oppure **build-universal.command**.
+3. Fai clic destro sul file scelto e seleziona **Apri**.
 4. Se macOS mostra un avviso, premi nuovamente **Apri**.
-5. Si aprirà una finestra del Terminale.
-6. Aspetta senza chiudere la finestra.
+5. Aspetta che nel Terminale compaia una riga che inizia con **Creata:**.
+6. Apri la cartella `build` corrispondente e trascina l'app in Applicazioni.
 
-Al primo utilizzo, macOS potrebbe chiederti di installare gli strumenti Apple:
-
-1. Accetta l'installazione.
-2. Aspetta che finisca.
-3. Apri nuovamente lo stesso file `.command`.
-
-La procedura è riuscita solo quando nel Terminale compare una riga che inizia con **Creata:**.
-
-### 4. Sposta l'app in Applicazioni
-
-1. Torna nella cartella del progetto.
-2. Apri la cartella creata dallo script: **build**, **build-apple-silicon** oppure **build-universal**.
-3. Trova **Blocco Tastiera.app**.
-4. Trascina l'app nella cartella **Applicazioni** del Mac.
-
-Ora puoi eliminare la cartella del progetto. Conservala soltanto se vuoi ricompilare l'app in futuro.
+Al primo utilizzo dello script, macOS potrebbe chiederti di installare gli strumenti Apple. Accetta, attendi la fine dell'installazione e apri nuovamente lo stesso file `.command`.
 
 ## Primo avvio
 
