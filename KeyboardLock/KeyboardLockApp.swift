@@ -210,7 +210,6 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
     @objc private func beginCountdown() {
         guard state == .ready else { return }
         guard requestAccessibilityPermission() else {
-            showPermissionAlert()
             return
         }
 
@@ -366,16 +365,4 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
         return AXIsProcessTrustedWithOptions(options)
     }
 
-    private func showPermissionAlert() {
-        let alert = NSAlert()
-        alert.alertStyle = .warning
-        alert.messageText = "Autorizzazione necessaria"
-        alert.informativeText = "Abilita iBlock in Impostazioni di Sistema > Privacy e sicurezza > Accessibilità. Se richiesto, abilitala anche in Monitoraggio input."
-        alert.addButton(withTitle: "Apri Accessibilità")
-        alert.addButton(withTitle: "OK")
-        if alert.runModal() == .alertFirstButtonReturn,
-           let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
-            NSWorkspace.shared.open(url)
-        }
-    }
 }

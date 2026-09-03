@@ -12,15 +12,15 @@ Scarica l'app già pronta. **Non servono Xcode, Terminale o la compilazione del 
 
 | Il tuo Mac | Download |
 | --- | --- |
-| Mac con chip **Apple M1, M2, M3, M4 o successivo** | [![Download Apple Silicon](https://img.shields.io/badge/Download-Apple%20Silicon-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.zip) |
-| Mac con processore **Intel** | [![Download Intel](https://img.shields.io/badge/Download-Intel-0071C5?style=for-the-badge&logo=intel&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.zip) |
-| Non sai quale scegliere? | [![Download Universale](https://img.shields.io/badge/Download-Universale-34C759?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.zip) |
+| Mac con chip **Apple M1, M2, M3, M4 o successivo** | [![Download Apple Silicon](https://img.shields.io/badge/Download-Apple%20Silicon-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.dmg) |
+| Mac con processore **Intel** | [![Download Intel](https://img.shields.io/badge/Download-Intel-0071C5?style=for-the-badge&logo=intel&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.dmg) |
+| Non sai quale scegliere? | [![Download Universale](https://img.shields.io/badge/Download-Universale-34C759?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.dmg) |
 
 > **Non sai che processore possiedi?** Scarica la versione **Universale**: funziona sia sui Mac Intel sia sui Mac Apple Silicon.
 
 [Visualizza tutte le versioni pubblicate](https://github.com/Domenico-lel/bloccotastieramacos/releases)
 
-Dopo il download, apri il file ZIP e trascina **iBlock.app** nella cartella **Applicazioni**. Le istruzioni complete sono disponibili nella sezione [Installazione facile](#installazione-facile).
+Dopo il download, apri il file DMG e trascina **iBlock** sull'icona **Applicazioni**. Le istruzioni complete sono disponibili nella sezione [Installazione facile](#installazione-facile).
 
 Serve per disattivare temporaneamente la tastiera, per esempio mentre la pulisci. Quando il blocco è attivo:
 
@@ -49,18 +49,21 @@ Questa versione è compatibile con:
 
 Non servono Xcode o Terminale. Usa uno dei pulsanti nella sezione [Download](#download) oppure apri la pagina [Releases](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest):
 
-- [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.zip)
-- [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.zip)
-- [Universale — funziona su entrambi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.zip)
+- [Apple Silicon — M1, M2, M3, M4 e successivi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Apple-Silicon.dmg)
+- [Intel](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Intel.dmg)
+- [Universale — funziona su entrambi](https://github.com/Domenico-lel/bloccotastieramacos/releases/latest/download/iBlock-Universale.dmg)
 
 Se non sai quale processore possiedi, apri il menu Apple  e scegli **Informazioni su questo Mac**. Se compare **Chip Apple**, scegli Apple Silicon. Se compare **Processore Intel**, scegli Intel. La versione Universale è sempre una scelta sicura.
 
 ### Passaggi
 
-1. Scarica uno dei tre file ZIP indicati sopra.
-2. Fai doppio clic sul file ZIP per estrarlo.
-3. Trascina **iBlock.app** nella cartella **Applicazioni**.
-4. Segui la sezione **Primo avvio** qui sotto.
+1. Scarica uno dei tre file DMG indicati sopra.
+2. Apri il file DMG scaricato.
+3. Nella finestra che compare, trascina **iBlock** sull'icona **Applicazioni**.
+4. Attendi la fine della copia, poi espelli **Installa iBlock** dalla barra laterale del Finder.
+5. Apri iBlock dalla cartella Applicazioni e segui la sezione **Primo avvio** qui sotto.
+
+Nella pagina Releases restano disponibili anche i file ZIP per chi li preferisce.
 
 ## Compilazione manuale con gli script
 

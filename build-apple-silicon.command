@@ -32,8 +32,10 @@ cp "$compiled_executable" "$executable_path"
 
 codesign --force --deep --sign - "$app_path"
 ditto -c -k --keepParent "$app_path" "$build_dir/iBlock-Apple-Silicon.zip"
+./create-dmg.command "$app_path" "$build_dir/iBlock-Apple-Silicon.dmg"
 
 print ""
 print "Creata: $app_path"
 print "Archivio: $build_dir/iBlock-Apple-Silicon.zip"
+print "Installer: $build_dir/iBlock-Apple-Silicon.dmg"
 file "$executable_path"

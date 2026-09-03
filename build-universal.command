@@ -37,8 +37,10 @@ lipo -create "$intel_executable" "$arm_executable" -output "$executable_path"
 
 codesign --force --deep --sign - "$app_path"
 ditto -c -k --keepParent "$app_path" "$build_dir/iBlock-Universale.zip"
+./create-dmg.command "$app_path" "$build_dir/iBlock-Universale.dmg"
 
 print ""
 print "Creata: $app_path"
 print "Archivio: $build_dir/iBlock-Universale.zip"
+print "Installer: $build_dir/iBlock-Universale.dmg"
 lipo -archs "$executable_path"
