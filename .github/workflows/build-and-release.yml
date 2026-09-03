@@ -35,16 +35,43 @@ jobs:
           lipo "$arm_app/Contents/MacOS/iBlock" -verify_arch arm64
           lipo "$universal_app/Contents/MacOS/iBlock" -verify_arch x86_64 arm64
 
-          codesign --verify --deep --strict "$intel_app"
-          codesign --verify --deep --strict "$arm_app"
-          codesign --verify --deep --strict "$universal_app"
+          codesign --verify --deep --strict --all-architectures "$intel_app"
+          codesign --verify --deep --strict --all-architectures "$arm_app"
+          codesign --verify --deep --strict --all-architectures "$universal_app"
 
           hdiutil verify build/iBlock-Intel.dmg
           hdiutil verify build-apple-silicon/iBlock-Apple-Silicon.dmg
           hdiutil verify build-universal/iBlock-Universale.dmg
 
+      - name: Run iBlock natively on Apple Silicon
+        run: |
+          test "$(uname -m)" = "arm64"
+          echo "Native runner: $(uname -m) — $(sysctl -n machdep.cpu.brand_string)"
+
+          arm_executable="build-apple-silicon/iBlock.app/Contents/MacOS/iBlock"
+          universal_executable="build-universal/iBlock.app/Contents/MacOS/iBlock"
+
+          arch -arm64 "$arm_executable" --self-test | tee /tmp/iblock-arm64-self-test.log
+          grep -q "self-test OK | architecture=arm64" /tmp/iblock-arm64-self-test.log
+
+          arch -arm64 "$universal_executable" --self-test | tee /tmp/iblock-universal-self-test.log
+          grep -q "self-test OK | architecture=arm64" /tmp/iblock-universal-self-test.log
+
+          if otool -L "$arm_executable" | tail -n +2 | grep -Ev '^[[:space:]]+(/usr/lib/|/System/Library/)'; then
+            echo "Errore: trovata una dipendenza esterna a macOS."
+            exit 1
+          fi
+
+          hdiutil attach -readonly -nobrowse build-universal/iBlock-Universale.dmg
+          trap 'hdiutil detach "/Volumes/Installa iBlock" >/dev/null 2>&1 || true' EXIT
+          arch -arm64 "/Volumes/Installa iBlock/iBlock.app/Contents/MacOS/iBlock" --self-test \
+            | tee /tmp/iblock-dmg-self-test.log
+          grep -q "self-test OK | architecture=arm64" /tmp/iblock-dmg-self-test.log
+          hdiutil detach "/Volumes/Installa iBlock"
+          trap - EXIT
+
       - name: Upload Intel download
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: iBlock-Intel
           path: |
@@ -52,7 +79,7 @@ jobs:
             build/iBlock-Intel.zip
 
       - name: Upload Apple Silicon download
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: iBlock-Apple-Silicon
           path: |
@@ -60,7 +87,7 @@ jobs:
             build-apple-silicon/iBlock-Apple-Silicon.zip
 
       - name: Upload Universal download
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: iBlock-Universale
           path: |

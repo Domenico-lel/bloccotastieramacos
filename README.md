@@ -6,6 +6,8 @@
 
 **iBlock** è una piccola applicazione gratuita per macOS.
 
+[![Build macOS](https://github.com/Domenico-lel/bloccotastieramacos/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/Domenico-lel/bloccotastieramacos/actions/workflows/build-and-release.yml)
+
 ## Download
 
 Scarica l'app già pronta. **C'è un solo installer e funziona su tutti i Mac compatibili.**
@@ -40,6 +42,8 @@ Questa versione è compatibile con:
 - Mac con processore Apple Silicon (`arm64`), inclusi M1, M2, M3, M4 e successivi;
 - macOS 13 Ventura;
 - Mac non ufficialmente supportati che utilizzano OpenCore Legacy Patcher.
+
+Prima di ogni pubblicazione, la build Apple Silicon e la build Universale vengono avviate e sottoposte a self-test su un runner GitHub con processore Apple M1 reale.
 
 ## Installazione facile
 

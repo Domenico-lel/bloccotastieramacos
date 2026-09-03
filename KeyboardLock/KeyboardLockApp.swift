@@ -1,5 +1,6 @@
 import AppKit
 import ApplicationServices
+import Darwin
 
 @main
 final class KeyboardLockApp: NSObject, NSApplicationDelegate {
@@ -25,11 +26,54 @@ final class KeyboardLockApp: NSObject, NSApplicationDelegate {
     private let keyboardLock = KeyboardEventLock()
 
     static func main() {
+        if CommandLine.arguments.contains("--self-test") {
+            Darwin.exit(runSelfTest())
+        }
+
         let app = NSApplication.shared
         let delegate = KeyboardLockApp()
         app.delegate = delegate
         app.setActivationPolicy(.regular)
         app.run()
+    }
+
+    private static func runSelfTest() -> Int32 {
+        #if arch(arm64)
+        let architecture = "arm64"
+        #elseif arch(x86_64)
+        let architecture = "x86_64"
+        #else
+        let architecture = "unsupported"
+        #endif
+
+        var failures: [String] = []
+        let info = Bundle.main.infoDictionary ?? [:]
+
+        if Bundle.main.bundleIdentifier != "it.domenicolella.iblock" {
+            failures.append("bundle identifier non valido")
+        }
+        if info["CFBundleExecutable"] as? String != "iBlock" {
+            failures.append("nome eseguibile non valido")
+        }
+        if (info["LSMinimumSystemVersion"] as? String)?.hasPrefix("13") != true {
+            failures.append("deployment target non valido")
+        }
+        if architecture == "unsupported" {
+            failures.append("architettura non supportata")
+        }
+
+        // Inizializza il componente CoreGraphics senza richiedere autorizzazioni
+        // e verifica che tutti i simboli necessari siano caricabili sul Mac host.
+        let eventLock = KeyboardEventLock()
+        eventLock.unlock()
+
+        if failures.isEmpty {
+            print("iBlock self-test OK | architecture=\(architecture) | macOS=\(ProcessInfo.processInfo.operatingSystemVersionString)")
+            return 0
+        }
+
+        fputs("iBlock self-test FAILED: \(failures.joined(separator: ", "))\n", stderr)
+        return 1
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
