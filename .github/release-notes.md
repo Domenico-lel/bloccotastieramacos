@@ -4,6 +4,11 @@ Scarica soltanto **iBlock-Universale.dmg**: funziona sia sui Mac Intel sia sui M
 
 I due collegamenti **Source code** creati automaticamente da GitHub sono destinati agli sviluppatori e non servono per installare l'app.
 
+## Novità
+
+- Nuova icona di iBlock con tastiera e lucchetto.
+- Sfondo completamente trasparente, senza bordi o riquadri bianchi.
+
 ## Installazione
 
 1. Apri `iBlock-Universale.dmg`.
